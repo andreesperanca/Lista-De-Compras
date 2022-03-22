@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Lista de Compras</string>
+    <string name="list_name">LIST_NAME</string>
+    <string name="txt_list_name">LIST_NAME</string>
+    <string name="entrarLista">Entrar na Lista</string>
+    <string name="removerLista">Remover Lista</string>
+</resources>
