@@ -1,20 +1,23 @@
 package com.voltaire.listadecompras.database
 
 
-
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.voltaire.listadecompras.database.daos.MarketListsDao
+import com.voltaire.listadecompras.database.models.Item
 import com.voltaire.listadecompras.database.models.MarketList
 import kotlinx.coroutines.CoroutineScope
 
 
+@Database(
+    entities =
+    [MarketList::class, Item::class]
+    , version = 1, exportSchema = false
+)
 
-@Database (entities = [MarketList::class], version = 1, exportSchema = false)
-
- abstract class MarketListRoomDataBase : RoomDatabase() {
+abstract class MarketListRoomDataBase : RoomDatabase() {
 
 
     abstract fun marketListDao(): MarketListsDao

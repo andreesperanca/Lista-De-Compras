@@ -4,4 +4,6 @@
     <string name="txt_list_name">LIST_NAME</string>
     <string name="entrarLista">Entrar na Lista</string>
     <string name="removerLista">Remover Lista</string>
+    <string name="item_name">ITEM_NAME</string>
+    <string name="suasListas">Suas Listas</string>
 </resources>

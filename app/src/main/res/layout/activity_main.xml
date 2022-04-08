@@ -5,29 +5,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.view.MainActivity">
+
+    <TextView
+        android:id="@+id/txt_my_lists"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:textSize="40sp"
+        android:text="@string/suasListas"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_main"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_width="0dp"
+        android:id="@+id/rv_home"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:listitem="@layout/recyclerview_lists"
-        tools:itemCount="3" />
+        app:layout_constraintTop_toBottomOf="@id/txt_my_lists"
+        tools:listitem="@layout/recycler_view_lists"
+        tools:itemCount="1"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        style="@style/Widget.MaterialComponents.Button"
         android:backgroundTint="@color/white"
+        android:layout_margin="25dp"
         android:src="@drawable/ic_baseline_add_24"
-        android:id="@+id/btnAdd"
+        android:id="@+id/btn_add_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_margin="20dp" />
-
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,14 +1,14 @@
 package com.voltaire.listadecompras.database.models
 
-import androidx.room.ColumnInfo
-import androidx.room.Dao
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+
+import android.os.Parcelable
+import androidx.room.*
+import kotlinx.android.parcel.Parcelize
 
 
-@Entity (tableName = "marketLists")
-
-data class MarketList (
-
-    @PrimaryKey @ColumnInfo(name = "listName") val name : String
-)
+@Entity(tableName = "marketLists")
+@Parcelize
+data class MarketList(
+    @PrimaryKey(autoGenerate = true)  val idList : Long = 0,
+    val name: String
+) : Parcelable

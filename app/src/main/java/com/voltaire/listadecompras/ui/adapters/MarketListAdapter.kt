@@ -1,53 +1,61 @@
 package com.voltaire.listadecompras.ui.adapters
 
+
 import android.view.LayoutInflater
 import android.view.View
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.voltaire.listadecompras.database.models.MarketList
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
-import androidx.recyclerview.widget.DiffUtil
 import com.voltaire.listadecompras.R
+import com.voltaire.listadecompras.database.models.MarketListWithItems
 
-class MarketListAdapter : ListAdapter<MarketList, MarketListAdapter.MarketListViewHolder>(ListComparator()) {
+class MarketListsAdapter(private val listener : MainAdapterCallBacks) : RecyclerView.Adapter<MarketListsAdapter.ListViewHolder> () {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MarketListViewHolder {
-        return MarketListViewHolder.create(parent)
+    private var list = emptyList<MarketListWithItems>()
+
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
+        return ListViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.recycler_view_lists, parent, false),
+            listener
+        )
     }
 
-    override fun onBindViewHolder(holder: MarketListViewHolder, position: Int) {
-        val current = getItem(position)
-        holder.bind(current.name)
+    override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
+        holder.bind(list[position])
     }
 
-    class MarketListViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
+    override fun getItemCount(): Int {
+        return list.size
+    }
 
-        private val txtNameList : TextView = itemView.findViewById(R.id.list_name)
+    fun setLists(lists: List<MarketListWithItems>) {
+        list = lists
+        notifyDataSetChanged()
+    }
 
-        fun bind(name : String?) {
+    inner class ListViewHolder(itemView: View,
+    private val listener : MainAdapterCallBacks
+    ) : RecyclerView.ViewHolder(itemView) {
 
-            txtNameList.text = name
-        }
+        private var nameList: TextView = itemView.findViewById(R.id.list_name_string)
+        private var btnExclude: Button = itemView.findViewById(R.id.btn_exclude)
+        private var btnOpenList: TextView = itemView.findViewById(R.id.btn_open_list)
 
-        companion object {
-            fun create(parent: ViewGroup): MarketListViewHolder {
-                val view: View = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.recyclerview_lists, parent, false)
-                return MarketListViewHolder(view)
+
+        fun bind(relationList: MarketListWithItems) {
+            nameList.text = relationList.marketList.name
+
+            btnExclude.setOnClickListener {
+                val listSelected = (list[adapterPosition])
+                listener.onItemClickListenerExclude(listSelected)
             }
-        }
 
-    }
+            btnOpenList.setOnClickListener {
+                listener.onItemClickListenerOpen(list[adapterPosition])
+            }
 
-    class ListComparator : DiffUtil.ItemCallback<MarketList>() {
-
-        override fun areItemsTheSame(oldItem: MarketList, newItem: MarketList): Boolean {
-            return oldItem === newItem
-        }
-
-        override fun areContentsTheSame(oldItem: MarketList, newItem: MarketList): Boolean {
-            return oldItem.name == newItem.name
         }
     }
 }
