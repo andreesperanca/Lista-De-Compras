@@ -11,7 +11,7 @@
 
 
 ### Sobre :book:
- Uma lista de compras simples.
+ Uma lista de compras simples, feita com o intuito de calcular o valor final da compra antes de passar no caixa. 
  
  ### Tecnologias :rocket:
  
