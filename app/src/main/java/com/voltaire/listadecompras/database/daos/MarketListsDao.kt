@@ -11,15 +11,9 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface MarketListsDao {
 
-    @Query("SELECT * FROM marketLists ORDER BY name ASC")
-    fun getAllLists(): Flow<List<MarketList>>
-
     @Transaction
     @Query("SELECT * FROM marketLists")
     fun getListsWithItems (): Flow<List<MarketListWithItems>>
-
-    @Query("SELECT * FROM items")
-    fun getAllItems(): Flow<List<Item>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert (list : MarketList)
@@ -35,9 +29,5 @@ interface MarketListsDao {
 
     @Delete
     suspend fun deleteItemList (listItems : List<Item>)
-
-    @Update
-    suspend fun updateItem(item: Item) {
-    }
 
 }

@@ -9,10 +9,7 @@ import kotlinx.coroutines.launch
 
 class MarketListViewModel (private val repository: MarketListsRepository) : ViewModel() {
 
-    val allLists: LiveData<List<MarketList>> = repository.allLists.asLiveData()
     val allListsWithItems : LiveData<List<MarketListWithItems>> = repository.allListsWithItems.asLiveData()
-    val allItems : LiveData<List<Item>> = repository.allItems.asLiveData()
-
 
     fun insert (list : MarketList) = viewModelScope.launch {
         repository.insert(list)
@@ -31,9 +28,6 @@ class MarketListViewModel (private val repository: MarketListsRepository) : View
     }
     fun deletelistItems ( listItems : List<Item>) = viewModelScope.launch {
         repository.deleteItemList(listItems)
-    }
-    fun updateItem (item : Item) = viewModelScope.launch {
-        repository.updateItem(item)
     }
 }
 

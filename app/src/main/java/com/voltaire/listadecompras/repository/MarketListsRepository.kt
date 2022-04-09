@@ -8,9 +8,7 @@ import kotlinx.coroutines.flow.Flow
 
 class MarketListsRepository (private val marketListDao: MarketListsDao) {
 
-    val allLists: Flow<List<MarketList>> = marketListDao.getAllLists()
     val allListsWithItems : Flow<List<MarketListWithItems>> = marketListDao.getListsWithItems()
-    val allItems : Flow<List<Item>> = marketListDao.getAllItems()
 
     suspend fun insert(list: MarketList) {
         marketListDao.insert(list)
@@ -30,8 +28,5 @@ class MarketListsRepository (private val marketListDao: MarketListsDao) {
 
     suspend fun deleteItemList (listItems : List<Item>) {
         marketListDao.deleteItemList(listItems)
-    }
-    suspend fun updateItem(item : Item) {
-        marketListDao.updateItem(item)
     }
 }
