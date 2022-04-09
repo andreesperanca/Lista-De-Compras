@@ -23,7 +23,7 @@
  ### Funcionalidades 🛠
  
 - [x] Valor do carrinho.
-- [x] Criar listas e items.
+- [x] Criar listas e itens.
 - [ ] Editar itens
 
 ### Autor
