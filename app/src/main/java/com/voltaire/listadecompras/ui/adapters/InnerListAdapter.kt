@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.voltaire.listadecompras.R
 import com.voltaire.listadecompras.database.models.Item
-import com.voltaire.listadecompras.database.models.MarketListWithItems
+import androidx.appcompat.app.AppCompatActivity
 
 class InnerListAdapter(private var itemsList : List<Item>,
                        private val listener : InnerAdapterCallBacks
@@ -38,12 +38,20 @@ class InnerListAdapter(private var itemsList : List<Item>,
 
         private var btnIGotItem: Button = itemView.findViewById(R.id.btn_iGot)
         private var btnDeleteItem: Button = itemView.findViewById(R.id.btn_exlude_item)
+        private var txtNameList : TextView = itemView.findViewById(R.id.item_name)
+        private var txtPrice : TextView = itemView.findViewById(R.id.txt_price)
+        private var txtAmount : TextView = itemView.findViewById(R.id.txt_amount)
 
         fun bind(marketListWithItems: Item) {
 
+            txtNameList.text = marketListWithItems.itemName
+            txtPrice.text = marketListWithItems.price
+            txtAmount.text = marketListWithItems.amount
+
             btnIGotItem.setOnClickListener {
                 listener.onItemIGot(itemsList[adapterPosition])
-
+                it.isEnabled = false
+                itemView.setBackgroundColor(R.color.red.toInt())
             }
             btnDeleteItem.setOnClickListener{
                 listener.onItemDelete(itemsList[adapterPosition])

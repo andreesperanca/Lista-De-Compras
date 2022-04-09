@@ -9,9 +9,11 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Item(
-    @PrimaryKey (autoGenerate = true) val idItem : Long = 0,
+    @PrimaryKey(autoGenerate = true) val idItem: Long = 0,
     val listIdCreator: Long,
     val itemName: String,
-    val price: Int,
-    val amount: Int
+    var price: String = "0",
+    var amount: String = "0",
+    var priceTotalItem : Double = (price.toDouble() * amount.toDouble())
+
 ) : Parcelable

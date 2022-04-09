@@ -31,4 +31,7 @@ class MarketListsRepository (private val marketListDao: MarketListsDao) {
     suspend fun deleteItemList (listItems : List<Item>) {
         marketListDao.deleteItemList(listItems)
     }
+    suspend fun updateItem(item : Item) {
+        marketListDao.updateItem(item)
+    }
 }

@@ -32,7 +32,9 @@ class MarketListViewModel (private val repository: MarketListsRepository) : View
     fun deletelistItems ( listItems : List<Item>) = viewModelScope.launch {
         repository.deleteItemList(listItems)
     }
-
+    fun updateItem (item : Item) = viewModelScope.launch {
+        repository.updateItem(item)
+    }
 }
 
 class WordViewModelFactory(private val repository: MarketListsRepository) : ViewModelProvider.Factory {

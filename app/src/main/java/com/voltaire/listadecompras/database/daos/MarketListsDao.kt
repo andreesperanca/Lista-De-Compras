@@ -36,4 +36,8 @@ interface MarketListsDao {
     @Delete
     suspend fun deleteItemList (listItems : List<Item>)
 
+    @Update
+    suspend fun updateItem(item: Item) {
+    }
+
 }

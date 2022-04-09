@@ -1,9 +1,20 @@
+
+
 <resources>
     <string name="app_name">Lista de Compras</string>
-    <string name="list_name">LIST_NAME</string>
+    <string name="list_name">Nome da lista</string>
     <string name="txt_list_name">LIST_NAME</string>
     <string name="entrarLista">Entrar na Lista</string>
     <string name="removerLista">Remover Lista</string>
-    <string name="item_name">ITEM_NAME</string>
-    <string name="suasListas">Suas Listas</string>
+    <string name="item_name">Nome</string>
+    <string name="suasListas">Listas</string>
+    <string name="amount">QTD</string>
+    <string name="price">Preço</string>
+    <string name="iGet">Peguei</string>
+    <string name="delete">Excluir</string>
+    <string name="add_item">Adicionar item</string>
+    <string name="amount1">Quantidade</string>
+    <string name="cartprice">Seu carrinho custa: R$ %1$s</string>
+    <string name="create">Criar</string>
+    <string name="confirm">Confirmar</string>
 </resources>

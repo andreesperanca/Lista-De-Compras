@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.FloatingBtn" parent="Widget.Design.FloatingActionButton">
+        <item name="android:width">0dp</item>
+        <item name="backgroundTint">@color/white</item>
+    </style>
+
+    <style name="Theme_NormalBtn" parent="Widget.AppCompat.Button">
+        <item name="backgroundTint">@color/black</item>3
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+
+</resources>

@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/GitHub Projects/Lista-De-Compras/app/src/main/res/drawable/class_box.xml" value="0.152" />
         <entry key="..\:/GitHub Projects/Lista-De-Compras/app/src/main/res/drawable/dialog_background.xml" value="0.1475" />
         <entry key="..\:/GitHub Projects/Lista-De-Compras/app/src/main/res/drawable/drawable_btn_remove.xml" value="0.1475" />
         <entry key="..\:/GitHub Projects/Lista-De-Compras/app/src/main/res/drawable/edit_list_drawable.xml" value="0.1355" />
@@ -11,12 +12,16 @@
         <entry key="..\:/GitHub Projects/Lista-De-Compras/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1355" />
         <entry key="..\:/GitHub Projects/Lista-De-Compras/app/src/main/res/drawable/list_box.xml" value="0.1" />
         <entry key="..\:/GitHub Projects/Lista-De-Compras/app/src/main/res/drawable/remove_list_drawable.xml" value="0.1355" />
-        <entry key="..\:/GitHub Projects/Lista-De-Compras/app/src/main/res/layout/activity_inner_list.xml" value="0.1921875" />
+        <entry key="..\:/GitHub Projects/Lista-De-Compras/app/src/main/res/drawable/trash.xml" value="0.152" />
+        <entry key="..\:/GitHub Projects/Lista-De-Compras/app/src/main/res/layout-pt/dialog_add_item.xml" value="0.1921875" />
+        <entry key="..\:/GitHub Projects/Lista-De-Compras/app/src/main/res/layout/activity_inner_list.xml" value="0.25" />
         <entry key="..\:/GitHub Projects/Lista-De-Compras/app/src/main/res/layout/activity_listing_list.xml" value="0.1921875" />
         <entry key="..\:/GitHub Projects/Lista-De-Compras/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/GitHub Projects/Lista-De-Compras/app/src/main/res/layout/confirm_values_layout.xml" value="0.1921875" />
+        <entry key="..\:/GitHub Projects/Lista-De-Compras/app/src/main/res/layout/dialog_add_item.xml" value="0.1921875" />
         <entry key="..\:/GitHub Projects/Lista-De-Compras/app/src/main/res/layout/dialog_add_list.xml" value="0.1921875" />
         <entry key="..\:/GitHub Projects/Lista-De-Compras/app/src/main/res/layout/list_recycler_view.xml" value="0.1" />
-        <entry key="..\:/GitHub Projects/Lista-De-Compras/app/src/main/res/layout/recycler_view_items.xml" value="0.1921875" />
+        <entry key="..\:/GitHub Projects/Lista-De-Compras/app/src/main/res/layout/recycler_view_items.xml" value="0.25" />
         <entry key="..\:/GitHub Projects/Lista-De-Compras/app/src/main/res/layout/recycler_view_lists.xml" value="0.17407407407407408" />
         <entry key="..\:/GitHub Projects/Lista-De-Compras/app/src/main/res/layout/recyclerview_lists.xml" value="0.18" />
         <entry key="..\:/ListadeCompras/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.136" />
