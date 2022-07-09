@@ -16,10 +16,4 @@
         android:layout_height="wrap_content"
         android:hint="@string/list_name"/>
 
-    <Button
-        android:id="@+id/btn_dialog_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/create"/>
-
 </LinearLayout>

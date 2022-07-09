@@ -1,14 +1,13 @@
 package com.voltaire.listadecompras.ui.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,14 +17,14 @@ import com.voltaire.listadecompras.application.ListsApplication
 import com.voltaire.listadecompras.database.models.Item
 import com.voltaire.listadecompras.database.models.MarketListWithItems
 import com.voltaire.listadecompras.databinding.ActivityInnerListBinding
-import com.voltaire.listadecompras.ui.adapters.InnerAdapterCallBacks
 import com.voltaire.listadecompras.ui.adapters.InnerListAdapter
 import com.voltaire.listadecompras.ui.viewmodels.MarketListViewModel
-import com.voltaire.listadecompras.ui.viewmodels.WordViewModelFactory
-import org.w3c.dom.Text
-import java.lang.Float.sum
+import com.voltaire.listadecompras.ui.viewmodels.factory.MarketListViewModelFactory
+import com.voltaire.listadecompras.utils.Constants.Companion.ERROR_MESSAGE
+import com.voltaire.listadecompras.utils.dialog.CreateItemDialog
+import com.voltaire.listadecompras.utils.functions.toastCreator
 
-class InnerListActivity : AppCompatActivity(), InnerAdapterCallBacks {
+class InnerListActivity : AppCompatActivity()  {
 
     private lateinit var binding: ActivityInnerListBinding
     private lateinit var adapter: InnerListAdapter
@@ -33,77 +32,61 @@ class InnerListActivity : AppCompatActivity(), InnerAdapterCallBacks {
     private var priceTotal: Double = 0.0
 
     private val viewModelInner: MarketListViewModel by viewModels {
-        WordViewModelFactory((application as ListsApplication).repository)
+        MarketListViewModelFactory((application as ListsApplication).repository)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityInnerListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-        var listMarketListWithItems =
+        //GET PARCELABLE
+        val listMarketListWithItems =
             intent.getParcelableExtra<MarketListWithItems>("listMarketListWithItems")
-        var index = intent.getIntExtra("index", 0)
+        val index = intent.getIntExtra("index", 0)
 
-        binding.listName.text = listMarketListWithItems?.marketList?.name
+        // ACTION BAR NAME
+        title = listMarketListWithItems?.marketList?.name
 
+        //CONFIG RECYCLERVIEW
+        configureRecyclerView()
+
+        //OBSERVER
         viewModelInner.allListsWithItems.observe(this, Observer { it: List<MarketListWithItems>? ->
-            var listAtt: List<Item> = it!![index!!.toInt()].itemsLists
-            adapter.setItems(listAtt)
-
-            priceTotal = 0.0
-            if (!listAtt.isEmpty()) {
-                for (element in listAtt) {
-                    priceTotal += element.priceTotalItem.toDouble()
+            var listAtt: List<Item> = emptyList<Item>()
+            if (it != null) {
+                listAtt = it[index].itemsLists
+                adapter.setItems(listAtt)
+                priceTotal = 0.0
+                if (listAtt.isNotEmpty()) {
+                    for (element in listAtt) {
+                        priceTotal += element.priceTotalItem
+                    }
                 }
+            } else {
+                toastCreator(this, ERROR_MESSAGE)
             }
-            binding.cartPrice.text = getString(R.string.cartprice, priceTotal.toString())
+            binding.cartPrice.text = priceTotal.toString()
         })
 
-        adapter = InnerListAdapter(listMarketListWithItems!!.itemsLists, this)
+        binding.btnAddItem.setOnClickListener {
+                CreateItemDialog(
+                    this,
+                    idList = listMarketListWithItems?.marketList?.idList ?: 0,
+                    createItem = { item ->
+                        viewModelInner.insertItem(item)
+                }).show()
+            }
+    }
+
+    private fun configureRecyclerView() {
+        adapter = InnerListAdapter()
         recyclerView = binding.rvInnerList
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this, VERTICAL, false)
 
-        binding.btnAddItem.setOnClickListener {
-            val view = View.inflate(this, R.layout.dialog_add_item, null)
-            val builder = AlertDialog.Builder(this)
-            builder.setView(view)
-            val dialog = builder.create()
-            dialog.show()
-            dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
-
-            view.findViewById<Button>(R.id.btn_dialog_add).setOnClickListener {
-
-                val txtNameList = view.findViewById<EditText>(R.id.txt_dialog_add)
-                val txtAmount = view.findViewById<EditText>(R.id.txt_amount)
-                val txtPrice = view.findViewById<EditText>(R.id.txt_price)
-
-                if (txtNameList.text != null && txtNameList.text.isNotEmpty()) {
-                    viewModelInner.insertItem(
-                        Item(
-                            0,
-                            listMarketListWithItems.marketList.idList,
-                            txtNameList.text.toString(),
-                            txtPrice.text.toString(),
-                            txtAmount.text.toString()
-                        )
-                    )
-                    dialog.dismiss()
-                } else {
-                    Toast.makeText(this, "Preencha o nome do produto", Toast.LENGTH_SHORT).show()
-                }
-            }
+        adapter.excludeItem = { item ->
+            viewModelInner.deleteItem(item)
         }
     }
-
-    override fun onItemDelete(item: Item) {
-        viewModelInner.deleteItem(item)
-    }
-
-    override fun onItemIGot(item: Item) {
-    }
-
 }

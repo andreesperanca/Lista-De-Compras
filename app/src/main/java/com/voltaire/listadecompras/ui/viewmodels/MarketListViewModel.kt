@@ -30,13 +30,3 @@ class MarketListViewModel (private val repository: MarketListsRepository) : View
         repository.deleteItemList(listItems)
     }
 }
-
-class WordViewModelFactory(private val repository: MarketListsRepository) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(MarketListViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return MarketListViewModel(repository) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
-    }
-}

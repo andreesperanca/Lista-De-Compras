@@ -2,24 +2,26 @@ package com.voltaire.listadecompras.ui.adapters
 
 
 import android.view.LayoutInflater
-import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import com.voltaire.listadecompras.R
+import com.voltaire.listadecompras.database.models.MarketList
 import com.voltaire.listadecompras.database.models.MarketListWithItems
+import com.voltaire.listadecompras.databinding.RecyclerViewListsBinding
 
-class MarketListsAdapter(private val listener : MainAdapterCallBacks) : RecyclerView.Adapter<MarketListsAdapter.ListViewHolder> () {
+class MarketListsAdapter(
+    var excludeList: (list : MarketListWithItems) -> Unit = {},
+    var openList: (list : MarketListWithItems) -> Unit = {},
+) : RecyclerView.Adapter<MarketListsAdapter.ListViewHolder> () {
 
     private var list = emptyList<MarketListWithItems>()
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        return ListViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.recycler_view_lists, parent, false),
-            listener
-        )
+        val binding = RecyclerViewListsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ListViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
@@ -30,30 +32,29 @@ class MarketListsAdapter(private val listener : MainAdapterCallBacks) : Recycler
         return list.size
     }
 
-    fun setLists(lists: List<MarketListWithItems>) {
+    fun updateList(lists: List<MarketListWithItems>) {
         list = lists
         notifyDataSetChanged()
     }
 
-    inner class ListViewHolder(itemView: View,
-    private val listener : MainAdapterCallBacks
-    ) : RecyclerView.ViewHolder(itemView) {
+    inner class ListViewHolder(
+       private val binding: RecyclerViewListsBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
 
-        private var nameList: TextView = itemView.findViewById(R.id.list_name_string)
-        private var btnExclude: Button = itemView.findViewById(R.id.btn_exclude)
-        private var btnOpenList: TextView = itemView.findViewById(R.id.btn_open_list)
-
+        private val nameList: TextView = binding.listNameString
+        private val btnExclude: Button = binding.btnExclude
+        private val btnOpenList: TextView = binding.btnOpenList
 
         fun bind(relationList: MarketListWithItems) {
             nameList.text = relationList.marketList.name
 
             btnExclude.setOnClickListener {
                 val listSelected = (list[adapterPosition])
-                listener.onItemClickListenerExclude(listSelected)
+                excludeList(listSelected)
             }
-
             btnOpenList.setOnClickListener {
-                listener.onItemClickListenerOpen(list[adapterPosition])
+                val listSelected = (list[adapterPosition])
+                openList(listSelected)
             }
 
         }

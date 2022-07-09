@@ -9,16 +9,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.voltaire.listadecompras.R
 import com.voltaire.listadecompras.database.models.Item
 import androidx.appcompat.app.AppCompatActivity
+import com.voltaire.listadecompras.database.models.MarketListWithItems
+import com.voltaire.listadecompras.databinding.RecyclerViewItemsBinding
+import com.voltaire.listadecompras.ui.viewmodels.InnerListViewModel
 
-class InnerListAdapter(private var itemsList : List<Item>,
-                       private val listener : InnerAdapterCallBacks
-) : RecyclerView.Adapter<InnerListAdapter.InnerListViewHolder>() {
+class InnerListAdapter(
+    var excludeItem: (item : Item) -> Unit = {},
+    var selectedItem: (item : Item) -> Unit = {}
+    ) : RecyclerView.Adapter<InnerListAdapter.InnerListViewHolder>() {
 
+    private var itemsList: List<Item> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InnerListViewHolder {
-        return InnerListViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.recycler_view_items, parent, false)
-        )
+        val binding =
+            RecyclerViewItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return InnerListViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: InnerListViewHolder, position: Int) {
@@ -34,13 +39,14 @@ class InnerListAdapter(private var itemsList : List<Item>,
         notifyDataSetChanged()
     }
 
-    inner class InnerListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-        private var btnIGotItem: Button = itemView.findViewById(R.id.btn_iGot)
-        private var btnDeleteItem: Button = itemView.findViewById(R.id.btn_exlude_item)
-        private var txtNameList : TextView = itemView.findViewById(R.id.item_name)
-        private var txtPrice : TextView = itemView.findViewById(R.id.txt_price)
-        private var txtAmount : TextView = itemView.findViewById(R.id.txt_amount)
+    inner class InnerListViewHolder(private val binding: RecyclerViewItemsBinding) :
+        RecyclerView.ViewHolder(binding.root)
+    {
+        private var btnIGotItem: Button = binding.btnIGot
+        private var btnDeleteItem: Button = binding.btnExludeItem
+        private var txtNameList: TextView = binding.itemName
+        private var txtPrice: TextView = binding.txtPrice
+        private var txtAmount: TextView = binding.txtAmount
 
         fun bind(marketListWithItems: Item) {
 
@@ -49,12 +55,12 @@ class InnerListAdapter(private var itemsList : List<Item>,
             txtAmount.text = marketListWithItems.amount
 
             btnIGotItem.setOnClickListener {
-                listener.onItemIGot(itemsList[adapterPosition])
                 it.isEnabled = false
                 itemView.setBackgroundColor(R.color.red.toInt())
             }
-            btnDeleteItem.setOnClickListener{
-                listener.onItemDelete(itemsList[adapterPosition])
+            btnDeleteItem.setOnClickListener {
+                val itemSelected = (itemsList[adapterPosition])
+                excludeItem(itemSelected)
             }
         }
     }
