@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
 import com.voltaire.listadecompras.database.models.MarketList
-import com.voltaire.listadecompras.database.models.MarketListWithItems
 import com.voltaire.listadecompras.databinding.DialogAddListBinding
 import com.voltaire.listadecompras.utils.Constants.Companion.CANCEL_MESSAGE
 import com.voltaire.listadecompras.utils.Constants.Companion.INVALID_DATA_MESSAGE

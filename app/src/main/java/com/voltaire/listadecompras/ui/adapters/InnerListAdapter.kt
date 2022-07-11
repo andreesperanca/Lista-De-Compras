@@ -56,7 +56,6 @@ class InnerListAdapter(
 
             btnIGotItem.setOnClickListener {
                 it.isEnabled = false
-                itemView.setBackgroundColor(R.color.red.toInt())
             }
             btnDeleteItem.setOnClickListener {
                 val itemSelected = (itemsList[adapterPosition])

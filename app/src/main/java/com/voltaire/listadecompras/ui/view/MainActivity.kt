@@ -3,19 +3,15 @@ package com.voltaire.listadecompras.ui.view
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
 import androidx.activity.viewModels
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
-import com.voltaire.listadecompras.R
 import com.voltaire.listadecompras.application.ListsApplication
-import com.voltaire.listadecompras.database.models.MarketList
 import com.voltaire.listadecompras.database.models.MarketListWithItems
 import com.voltaire.listadecompras.databinding.ActivityMainBinding
 import com.voltaire.listadecompras.ui.adapters.MarketListsAdapter
@@ -40,7 +36,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         viewModel.allListsWithItems.observe(this, Observer {
-            adapter.updateList(it)
+            adapter.updateList(it as MutableList)
+            if (adapter.list.size == 0) {
+                binding.emptyListLayout.visibility = View.VISIBLE
+            } else {
+                binding.emptyListLayout.visibility = View.INVISIBLE
+            }
         })
 
         configureRecyclerView()
@@ -50,6 +51,25 @@ class MainActivity : AppCompatActivity() {
                 viewModel.insert(it)
             }).show()
         }
+
+        //SWIPE HANDLER
+        val swipeHandler = object : ItemTouchHelper.SimpleCallback(0,
+        ItemTouchHelper.START or ItemTouchHelper.END) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                adapter.removeAt(viewHolder.adapterPosition)
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(swipeHandler)
+        itemTouchHelper.attachToRecyclerView(binding.rvHome)
+
     }
 
     private fun configureRecyclerView() {

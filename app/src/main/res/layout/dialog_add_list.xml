@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     android:gravity="center"
-    android:background="@drawable/dialog_background"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -12,6 +11,8 @@
     <EditText
         android:id="@+id/txt_dialog_add"
         android:padding="16dp"
+        android:maxLength="13"
+        android:maxLines="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/list_name"/>

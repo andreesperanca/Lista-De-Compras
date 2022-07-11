@@ -1,12 +1,7 @@
 package com.voltaire.listadecompras.ui.view
 
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -46,7 +41,13 @@ class InnerListActivity : AppCompatActivity()  {
         val index = intent.getIntExtra("index", 0)
 
         // ACTION BAR NAME
-        title = listMarketListWithItems?.marketList?.name
+        setSupportActionBar(binding.toolbar)
+
+        supportActionBar?.let { toolbar ->
+            toolbar.setDisplayHomeAsUpEnabled(true)
+            toolbar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_white)
+            toolbar.title = listMarketListWithItems?.marketList?.name
+        }
 
         //CONFIG RECYCLERVIEW
         configureRecyclerView()

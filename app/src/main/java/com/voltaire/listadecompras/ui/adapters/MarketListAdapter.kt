@@ -16,11 +16,13 @@ class MarketListsAdapter(
     var openList: (list : MarketListWithItems) -> Unit = {},
 ) : RecyclerView.Adapter<MarketListsAdapter.ListViewHolder> () {
 
-    private var list = emptyList<MarketListWithItems>()
+    public var list = mutableListOf<MarketListWithItems>()
+
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val binding = RecyclerViewListsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val emptyList =
         return ListViewHolder(binding)
     }
 
@@ -32,9 +34,14 @@ class MarketListsAdapter(
         return list.size
     }
 
-    fun updateList(lists: List<MarketListWithItems>) {
+    fun updateList(lists: MutableList<MarketListWithItems>) {
         list = lists
-        notifyDataSetChanged()
+        notifyItemChanged(list.size)
+    }
+
+    fun removeAt(position: Int) {
+        excludeList(list[position])
+        notifyItemRemoved(position)
     }
 
     inner class ListViewHolder(
@@ -42,21 +49,18 @@ class MarketListsAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         private val nameList: TextView = binding.listNameString
-        private val btnExclude: Button = binding.btnExclude
-        private val btnOpenList: TextView = binding.btnOpenList
 
         fun bind(relationList: MarketListWithItems) {
             nameList.text = relationList.marketList.name
 
-            btnExclude.setOnClickListener {
-                val listSelected = (list[adapterPosition])
-                excludeList(listSelected)
-            }
-            btnOpenList.setOnClickListener {
+//            btnExclude.setOnClickListener {
+//                val listSelected = (list[adapterPosition])
+//                excludeList(listSelected)
+//            }
+            binding.root.setOnClickListener {
                 val listSelected = (list[adapterPosition])
                 openList(listSelected)
             }
-
         }
     }
 }

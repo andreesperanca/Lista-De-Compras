@@ -1,7 +1,5 @@
-
-
 <resources>
-    <string name="app_name">Lista de Compras</string>
+    <string name="app_name">Listas de Compras</string>
     <string name="list_name">Nome da lista</string>
     <string name="txt_list_name">LIST_NAME</string>
     <string name="entrarLista">Entrar na Lista</string>
@@ -17,4 +15,5 @@
     <string name="cartprice">Seu carrinho custa:</string>
     <string name="create">Criar</string>
     <string name="confirm">Confirmar</string>
+    <string name="nothing">Nenhuma lista encontrada.</string>
 </resources>
