@@ -1,10 +1,13 @@
 package com.voltaire.listadecompras.ui.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.appcompat.app.ActionBar
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
@@ -13,6 +16,7 @@ import com.voltaire.listadecompras.R
 import com.voltaire.listadecompras.databinding.FragmentOnboardingBinding
 import com.voltaire.listadecompras.utils.IntroSlide
 import com.voltaire.listadecompras.utils.IntroSlideAdapter
+import com.voltaire.listadecompras.utils.PreferencesUtils
 import com.voltaire.listadecompras.utils.extension.getDrawable
 import com.voltaire.listadecompras.utils.extension.setVisible
 import com.voltaire.listadecompras.utils.extension.viewBinding
@@ -26,24 +30,29 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        toastCreator(requireContext(), "oLPA")
         val slideViewPager = binding.fragmentOnboardingSlideViewpager
-        // TODO: replace dummy content with real data later on
+
+
         val items = listOf(
             IntroSlide(
-                R.drawable.trash,
-                R.string.suasListas,
-                R.string.add_item
+                icon = R.raw.organize,
+                title = R.string.organize_title,
+                description = R.string.organize_description
             ),
             IntroSlide(
-                R.drawable.ic_baseline_add_24,
-                R.string.list_name,
-                R.string.add_item
+                icon = R.raw.controle,
+                title = R.string.controle_title,
+                description = R.string.controle_description
             ),
             IntroSlide(
-                R.drawable.ic_launcher_foreground,
-                R.string.cartprice,
-                R.string.add_item
+                icon = R.raw.surpresa,
+                title = R.string.surprise_title,
+                description = R.string.surprise_description
+            ),
+            IntroSlide(
+                icon = R.raw.swipe,
+                title = R.string.swipe_title,
+                description = R.string.swipe_description
             )
         )
 
@@ -67,7 +76,9 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
 
         // QUANDO TOCAR NO BOTÃO, EXECUTE A AçÃO DESEJADA
         binding.fragmentOnboardingGo.setOnClickListener {
-            toastCreator(requireContext(),"navegue para tela que desejar")
+            PreferencesUtils(requireContext()).saveResponse()
+            val intent = Intent(requireContext(), MainActivity::class.java)
+            startActivity(intent)
         }
     }
 

@@ -6,6 +6,7 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent">
@@ -25,11 +26,13 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Meu titulo" />
 
-        <ImageView
+        <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/intro_slide_icon"
             android:layout_width="match_parent"
             android:layout_height="350dp"
             android:layout_marginTop="26dp"
+            app:lottie_loop="true"
+            app:lottie_autoPlay="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/intro_slide_title"

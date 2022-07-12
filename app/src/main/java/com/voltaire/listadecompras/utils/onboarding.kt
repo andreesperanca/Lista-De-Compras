@@ -9,6 +9,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import com.voltaire.listadecompras.R
 import com.voltaire.listadecompras.utils.extension.inflate
 
@@ -28,7 +29,7 @@ class IntroSlideAdapter(items: List<IntroSlide>) : BaseAdapter<IntroSlide>() {
     inner class IntroSlideViewHolder(view: View) : BaseAdapter.BaseViewHolder<IntroSlide>(view) {
         override fun bindView(item: IntroSlide) {
             with(itemView) {
-                findViewById<ImageView>(R.id.intro_slide_icon).setImageResource(item.icon)
+                findViewById<LottieAnimationView>(R.id.intro_slide_icon).setAnimation(item.icon)
                 findViewById<TextView>(R.id.intro_slide_title).setText(item.title)
                 findViewById<TextView>(R.id.intro_slide_description).setText(item.description)
             }

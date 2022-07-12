@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
@@ -81,10 +82,12 @@ class InnerListActivity : AppCompatActivity()  {
     }
 
     private fun configureRecyclerView() {
+        val divisor = DividerItemDecoration(this, LinearLayoutManager.VERTICAL)
         adapter = InnerListAdapter()
         recyclerView = binding.rvInnerList
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this, VERTICAL, false)
+        recyclerView.addItemDecoration(divisor)
 
         adapter.excludeItem = { item ->
             viewModelInner.deleteItem(item)

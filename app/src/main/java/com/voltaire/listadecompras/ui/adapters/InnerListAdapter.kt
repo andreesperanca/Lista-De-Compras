@@ -42,8 +42,6 @@ class InnerListAdapter(
     inner class InnerListViewHolder(private val binding: RecyclerViewItemsBinding) :
         RecyclerView.ViewHolder(binding.root)
     {
-        private var btnIGotItem: Button = binding.btnIGot
-        private var btnDeleteItem: Button = binding.btnExludeItem
         private var txtNameList: TextView = binding.itemName
         private var txtPrice: TextView = binding.txtPrice
         private var txtAmount: TextView = binding.txtAmount
@@ -54,13 +52,13 @@ class InnerListAdapter(
             txtPrice.text = marketListWithItems.price
             txtAmount.text = marketListWithItems.amount
 
-            btnIGotItem.setOnClickListener {
-                it.isEnabled = false
-            }
-            btnDeleteItem.setOnClickListener {
-                val itemSelected = (itemsList[adapterPosition])
-                excludeItem(itemSelected)
-            }
+//            btnIGotItem.setOnClickListener {
+//                it.isEnabled = false
+//            }
+//            btnDeleteItem.setOnClickListener {
+//                val itemSelected = (itemsList[adapterPosition])
+//                excludeItem(itemSelected)
+//            }
         }
     }
 }

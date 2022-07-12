@@ -16,4 +16,13 @@
     <string name="create">Criar</string>
     <string name="confirm">Confirmar</string>
     <string name="nothing">Nenhuma lista encontrada.</string>
+    <string name="organize_title">Organize</string>
+    <string name="organize_description">Organize suas compras, marcando produtos que já está no seu carrinho.</string>
+    <string name="controle_title">Controle</string>
+    <string name="controle_description">Tenha mais controle de suas compras, como quantidade e valor que está pagando em cada produto.</string>
+    <string name="surprise_title">Sem surpresas</string>
+    <string name="surprise_description">Evite surpresas na hora de pagar com o cálculo em tempo real do seu carrinho.</string>
+    <string name="avant">Continuar</string>
+    <string name="swipe_title">Arraste para excluir</string>
+    <string name="swipe_description">Arraste para os lados para excluir listas e produtos.</string>
 </resources>
