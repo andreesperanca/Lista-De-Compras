@@ -36,29 +36,21 @@ class InnerListAdapter(
 
     fun setItems(itemLists: List<Item>) {
         itemsList = itemLists
-        notifyDataSetChanged()
+        notifyItemChanged(itemsList.size)
+    }
+
+    fun removeAt(position: Int) {
+        excludeItem(itemsList[position])
+        notifyItemRemoved(position)
     }
 
     inner class InnerListViewHolder(private val binding: RecyclerViewItemsBinding) :
         RecyclerView.ViewHolder(binding.root)
     {
-        private var txtNameList: TextView = binding.itemName
-        private var txtPrice: TextView = binding.txtPrice
-        private var txtAmount: TextView = binding.txtAmount
-
         fun bind(marketListWithItems: Item) {
-
-            txtNameList.text = marketListWithItems.itemName
-            txtPrice.text = marketListWithItems.price
-            txtAmount.text = marketListWithItems.amount
-
-//            btnIGotItem.setOnClickListener {
-//                it.isEnabled = false
-//            }
-//            btnDeleteItem.setOnClickListener {
-//                val itemSelected = (itemsList[adapterPosition])
-//                excludeItem(itemSelected)
-//            }
+            binding.itemName.text = marketListWithItems.itemName
+            binding.txtPrice.text = marketListWithItems.price
+            binding.txtAmount.text = marketListWithItems.amount
         }
     }
 }

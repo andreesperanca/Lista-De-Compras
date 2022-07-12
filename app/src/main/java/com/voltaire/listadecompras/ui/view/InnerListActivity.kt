@@ -1,10 +1,12 @@
 package com.voltaire.listadecompras.ui.view
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
@@ -50,6 +52,23 @@ class InnerListActivity : AppCompatActivity()  {
             toolbar.title = listMarketListWithItems?.marketList?.name
         }
 
+        //SWIPE HANDLER
+        val swipeHandler = object : ItemTouchHelper.SimpleCallback(0,
+            ItemTouchHelper.START or ItemTouchHelper.END) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                adapter.removeAt(viewHolder.adapterPosition)
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(swipeHandler)
+        itemTouchHelper.attachToRecyclerView(binding.rvInnerList)
+
         //CONFIG RECYCLERVIEW
         configureRecyclerView()
 
@@ -92,5 +111,14 @@ class InnerListActivity : AppCompatActivity()  {
         adapter.excludeItem = { item ->
             viewModelInner.deleteItem(item)
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
