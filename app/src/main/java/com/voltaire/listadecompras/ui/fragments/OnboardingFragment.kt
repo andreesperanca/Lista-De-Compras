@@ -1,4 +1,4 @@
-package com.voltaire.listadecompras.ui.view
+package com.voltaire.listadecompras.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,25 +6,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
-import androidx.appcompat.app.ActionBar
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.voltaire.listadecompras.R
 import com.voltaire.listadecompras.databinding.FragmentOnboardingBinding
+import com.voltaire.listadecompras.ui.activity.MainActivity
 import com.voltaire.listadecompras.utils.IntroSlide
 import com.voltaire.listadecompras.utils.IntroSlideAdapter
 import com.voltaire.listadecompras.utils.PreferencesUtils
 import com.voltaire.listadecompras.utils.extension.getDrawable
 import com.voltaire.listadecompras.utils.extension.setVisible
 import com.voltaire.listadecompras.utils.extension.viewBinding
-import com.voltaire.listadecompras.utils.functions.toastCreator
 
 class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
 
-    // VEJA VIDEO BINDING AUTOMATICO: https://youtu.be/qivrch6qxQw
+    // VIEWBINDING AUTOMÁTICO
     private val binding by viewBinding(FragmentOnboardingBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -34,11 +31,6 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
 
 
         val items = listOf(
-            IntroSlide(
-                icon = R.raw.organize,
-                title = R.string.organize_title,
-                description = R.string.organize_description
-            ),
             IntroSlide(
                 icon = R.raw.controle,
                 title = R.string.controle_title,
@@ -61,7 +53,7 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
         val indicators = view.findViewById<LinearLayout>(R.id.fragment_onboading_slide_indicator)
         // CRIAR QUANTIDADE CORRETA DE INDICADORES
         setupIndicators(indicators, introSlideAdapter.itemCount)
-        // COLOCAR SELEçÃO NO PRIMEIRO ITEM
+        // COLOCAR SELEÇÃO NO PRIMEIRO ITEM
         setCurrentIndicator(indicators, 0)
         // PARA SABER A HORA DE EXIBIR O BOTÃO FINAL NO ONBOARDING SCREEN
         slideViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
@@ -74,11 +66,12 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
             }
         })
 
-        // QUANDO TOCAR NO BOTÃO, EXECUTE A AçÃO DESEJADA
+        // QUANDO TOCAR NO BOTÃO, EXECUTE:
         binding.fragmentOnboardingGo.setOnClickListener {
-            PreferencesUtils(requireContext()).saveResponse()
+            PreferencesUtils(requireContext()).saveVisualization()
             val intent = Intent(requireContext(), MainActivity::class.java)
             startActivity(intent)
+            activity?.finish()
         }
     }
 

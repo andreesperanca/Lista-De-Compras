@@ -44,19 +44,12 @@ class IntroSlideAdapter(items: List<IntroSlide>) : BaseAdapter<IntroSlide>() {
         }
     }
 
-    override fun getItemViewType(position: Int): Int {
-        // UM EXEMPLO DIDÁTICO
-        return when(position){
-            0 -> R.layout.intro_slide
-            items.size - 1 -> R.layout.intro_slide
-            else -> R.layout.intro_slide
-        }
-    }
+    override fun getItemViewType(position: Int): Int = R.layout.intro_slide
 }
 
 abstract class BaseAdapter<T> : RecyclerView.Adapter<BaseAdapter.BaseViewHolder<T>>() {
 
-    protected val items: MutableList<T> = mutableListOf()
+    private val items: MutableList<T> = mutableListOf()
 
     override fun onBindViewHolder(holder: BaseViewHolder<T>, position: Int) =
         holder.bindView(items[position])

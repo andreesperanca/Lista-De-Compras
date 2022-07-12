@@ -1,15 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/onboardingFragment">
+    app:startDestination="@id/listsFragment">
 
     <fragment
-        android:id="@+id/onboardingFragment"
-        android:name="com.voltaire.listadecompras.ui.view.OnboardingFragment"
-        android:label="fragment_onboarding"
-        tools:layout="@layout/fragment_onboarding" />
+        android:id="@+id/listsFragment"
+        android:name="com.voltaire.listadecompras.ui.fragments.ListsFragment"
+        android:label="fragment_lists"
+        tools:layout="@layout/fragment_lists" >
+        <action
+            android:id="@+id/action_listsFragment_to_innerListFragment"
+            app:destination="@id/innerListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/innerListFragment"
+        android:name="com.voltaire.listadecompras.ui.fragments.InnerListFragment"
+        android:label="fragment_inner_list"
+        tools:layout="@layout/fragment_inner_list" >
+        <argument
+            android:name="marketListWithItems"
+            app:argType="com.voltaire.listadecompras.database.models.MarketListWithItems" />
+        <argument
+            android:name="index"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/action_innerListFragment_to_listsFragment"
+            app:destination="@id/listsFragment" />
+    </fragment>
 
 </navigation>

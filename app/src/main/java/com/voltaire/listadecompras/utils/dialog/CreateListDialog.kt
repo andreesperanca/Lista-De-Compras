@@ -9,11 +9,10 @@ import com.voltaire.listadecompras.utils.Constants.Companion.CANCEL_MESSAGE
 import com.voltaire.listadecompras.utils.Constants.Companion.INVALID_DATA_MESSAGE
 import com.voltaire.listadecompras.utils.functions.toastCreator
 
-class CreateListDialog(private val context: Context,
-                       var createList: (newList : MarketList) -> Unit = {}
-) {
+class CreateListDialog() {
 
-    fun show()  {
+    fun show(context : Context, createList: (newList: MarketList) -> Unit = {})
+    {
         DialogAddListBinding
             .inflate(LayoutInflater.from(context)).apply {
 

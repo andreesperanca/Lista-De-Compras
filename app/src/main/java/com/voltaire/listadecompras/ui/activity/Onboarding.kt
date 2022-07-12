@@ -1,4 +1,4 @@
-package com.voltaire.listadecompras.ui.view
+package com.voltaire.listadecompras.ui.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -11,7 +11,8 @@ class Onboarding : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_onboarding)
 
-        val response = PreferencesUtils(this).loadResponse()
+        val response = PreferencesUtils(this).wasSeen()
+
         if (response) {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)

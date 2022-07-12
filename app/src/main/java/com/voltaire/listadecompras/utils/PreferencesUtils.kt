@@ -11,11 +11,11 @@ class PreferencesUtils (context: Context) {
         const val DEFAULT_VALUE = false
     }
 
-    fun loadResponse() : Boolean {
+    fun wasSeen() : Boolean {
         return sPrefs.getBoolean(KEY_WATCH_ONBOARDING, DEFAULT_VALUE)
     }
 
-    fun saveResponse() {
+    fun saveVisualization() {
         sPrefs
             .edit()
             .putBoolean(KEY_WATCH_ONBOARDING, true)

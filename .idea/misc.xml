@@ -32,12 +32,15 @@
         <entry key="..\:/GitHub Projects/MVVM-Lista-de-Compras/app/src/main/res/drawable/trash.xml" value="0.145" />
         <entry key="..\:/GitHub Projects/MVVM-Lista-de-Compras/app/src/main/res/layout/activity_inner_list.xml" value="0.21614583333333334" />
         <entry key="..\:/GitHub Projects/MVVM-Lista-de-Compras/app/src/main/res/layout/activity_main.xml" value="0.21614583333333334" />
+        <entry key="..\:/GitHub Projects/MVVM-Lista-de-Compras/app/src/main/res/layout/activity_main2.xml" value="0.21614583333333334" />
         <entry key="..\:/GitHub Projects/MVVM-Lista-de-Compras/app/src/main/res/layout/activity_onboarding.xml" value="0.18" />
         <entry key="..\:/GitHub Projects/MVVM-Lista-de-Compras/app/src/main/res/layout/confirm_values_layout.xml" value="0.21614583333333334" />
         <entry key="..\:/GitHub Projects/MVVM-Lista-de-Compras/app/src/main/res/layout/dialog_add_item.xml" value="0.21614583333333334" />
         <entry key="..\:/GitHub Projects/MVVM-Lista-de-Compras/app/src/main/res/layout/dialog_add_list.xml" value="0.21614583333333334" />
         <entry key="..\:/GitHub Projects/MVVM-Lista-de-Compras/app/src/main/res/layout/empty.xml" value="0.21510416666666668" />
         <entry key="..\:/GitHub Projects/MVVM-Lista-de-Compras/app/src/main/res/layout/empty_list.xml" value="0.21614583333333334" />
+        <entry key="..\:/GitHub Projects/MVVM-Lista-de-Compras/app/src/main/res/layout/fragment_inner_list.xml" value="0.18" />
+        <entry key="..\:/GitHub Projects/MVVM-Lista-de-Compras/app/src/main/res/layout/fragment_lists.xml" value="0.21614583333333334" />
         <entry key="..\:/GitHub Projects/MVVM-Lista-de-Compras/app/src/main/res/layout/fragment_onboarding.xml" value="0.21510416666666668" />
         <entry key="..\:/GitHub Projects/MVVM-Lista-de-Compras/app/src/main/res/layout/intro_slide.xml" value="0.21614583333333334" />
         <entry key="..\:/GitHub Projects/MVVM-Lista-de-Compras/app/src/main/res/layout/recycler_view_items.xml" value="0.21614583333333334" />
