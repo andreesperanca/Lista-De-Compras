@@ -1,8 +1,8 @@
 <h1 align="center">Calculadora de Compras</h1>
 
 <h1 align="center">
-  <img style="border-radius: 50%;" src="./assets/listsScreen.png" width="250px;" alt=""/>
   <img style="border-radius: 50%;" src="./assets/itemsScreen.png" width="250px;" alt=""/>
+  <img style="border-radius: 50%;" src="./assets/listsScreen.png" width="250px;" alt=""/>
   
   </h1>
   <h1 align="center">
