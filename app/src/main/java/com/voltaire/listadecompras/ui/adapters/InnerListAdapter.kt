@@ -1,17 +1,10 @@
 package com.voltaire.listadecompras.ui.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.voltaire.listadecompras.R
 import com.voltaire.listadecompras.database.models.Item
-import androidx.appcompat.app.AppCompatActivity
-import com.voltaire.listadecompras.database.models.MarketListWithItems
 import com.voltaire.listadecompras.databinding.RecyclerViewItemsBinding
-import com.voltaire.listadecompras.ui.viewmodels.InnerListViewModel
 
 class InnerListAdapter(
     var excludeItem: (item : Item) -> Unit = {},

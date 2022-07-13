@@ -8,7 +8,7 @@ import com.voltaire.listadecompras.repository.MarketListsRepository
 import kotlinx.coroutines.launch
 import java.util.concurrent.RecursiveTask
 
-class MarketListViewModel(private val repository: MarketListsRepository) : ViewModel() {
+class SharedViewModel(private val repository: MarketListsRepository) : ViewModel() {
 
     private var _priceCart = MutableLiveData<Double>()
     private val priceCart: LiveData<Double>

@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -13,28 +12,22 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.voltaire.listadecompras.R
-import com.voltaire.listadecompras.application.ListsApplication
 import com.voltaire.listadecompras.database.models.Item
-import com.voltaire.listadecompras.database.models.MarketListWithItems
 import com.voltaire.listadecompras.databinding.FragmentInnerListBinding
 import com.voltaire.listadecompras.ui.adapters.InnerListAdapter
-import com.voltaire.listadecompras.ui.viewmodels.MarketListViewModel
-import com.voltaire.listadecompras.ui.viewmodels.factory.MarketListViewModelFactory
+import com.voltaire.listadecompras.ui.viewmodels.SharedViewModel
 import com.voltaire.listadecompras.utils.Constants
 import com.voltaire.listadecompras.utils.SwipeHandler
 import com.voltaire.listadecompras.utils.dialog.CreateItemDialog
 import com.voltaire.listadecompras.utils.functions.toastCreator
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class InnerListFragment : Fragment() {
 
     private lateinit var binding: FragmentInnerListBinding
     private lateinit var adapter: InnerListAdapter
     private lateinit var recyclerView: RecyclerView
-    private val viewModel: MarketListViewModel by sharedViewModel()
-
-    private var priceTotal: Double = 0.0
+    private val viewModel: SharedViewModel by sharedViewModel()
     private val args: InnerListFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {

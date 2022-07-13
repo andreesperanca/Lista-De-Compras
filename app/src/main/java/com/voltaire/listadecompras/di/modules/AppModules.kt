@@ -4,7 +4,7 @@ import androidx.room.Room
 import com.voltaire.listadecompras.database.MarketListRoomDataBase
 import com.voltaire.listadecompras.database.daos.MarketListsDao
 import com.voltaire.listadecompras.repository.MarketListsRepository
-import com.voltaire.listadecompras.ui.viewmodels.MarketListViewModel
+import com.voltaire.listadecompras.ui.viewmodels.SharedViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -25,8 +25,8 @@ val appModules = module {
         MarketListsRepository(get())
     }
 
-    viewModel<MarketListViewModel> {
-        MarketListViewModel(repository = get())
+    viewModel<SharedViewModel> {
+        SharedViewModel(repository = get())
     }
 
 
