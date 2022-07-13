@@ -11,7 +11,7 @@ import java.util.concurrent.RecursiveTask
 class MarketListViewModel(private val repository: MarketListsRepository) : ViewModel() {
 
     private var _priceCart = MutableLiveData<Double>()
-    public val priceCart: LiveData<Double>
+    private val priceCart: LiveData<Double>
         get() = _priceCart
 
     val allListsWithItems: LiveData<List<MarketListWithItems>>
