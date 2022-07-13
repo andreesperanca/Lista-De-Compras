@@ -1,16 +1,17 @@
 package com.voltaire.listadecompras.application
 
 import android.app.Application
-import com.voltaire.listadecompras.database.MarketListRoomDataBase
-import com.voltaire.listadecompras.repository.MarketListsRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.SupervisorJob
+import com.voltaire.listadecompras.di.modules.appModules
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 
 class ListsApplication : Application() {
 
-    private val applicationScope = CoroutineScope(SupervisorJob())
-
-    val database by lazy { MarketListRoomDataBase.getDatabase(applicationScope,this) }
-    val repository by lazy { MarketListsRepository(database.marketListDao()) }
-
+    override fun onCreate() {
+        super.onCreate()
+        startKoin {
+            androidContext(this@ListsApplication)
+            modules(appModules)
+        }
+    }
 }

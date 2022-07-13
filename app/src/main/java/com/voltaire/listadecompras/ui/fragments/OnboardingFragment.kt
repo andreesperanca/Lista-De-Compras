@@ -96,7 +96,7 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
         }
     }
 
-    // SELECIONAR O INDICADOR DE ACORDO COM A PAGINA ATUAL
+    // SELECIONAR O INDICADOR DE ACORDO COM A PÁGINA ATUAL
 
     private fun setCurrentIndicator(indicatorContainer: LinearLayout, index: Int) {
         for (i in 0 until indicatorContainer.childCount) {

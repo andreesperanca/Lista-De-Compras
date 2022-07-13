@@ -12,30 +12,30 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.voltaire.listadecompras.application.ListsApplication
+import com.voltaire.listadecompras.database.MarketListRoomDataBase
+import com.voltaire.listadecompras.database.models.MarketList
 import com.voltaire.listadecompras.database.models.MarketListWithItems
 import com.voltaire.listadecompras.databinding.FragmentListsBinding
+import com.voltaire.listadecompras.repository.MarketListsRepository
 import com.voltaire.listadecompras.ui.adapters.MarketListsAdapter
 import com.voltaire.listadecompras.ui.viewmodels.MarketListViewModel
 import com.voltaire.listadecompras.ui.viewmodels.factory.MarketListViewModelFactory
 import com.voltaire.listadecompras.utils.SwipeHandler
 import com.voltaire.listadecompras.utils.dialog.CreateListDialog
+import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ListsFragment : Fragment() {
-
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: MarketListsAdapter
     private lateinit var binding: FragmentListsBinding
-
-    private val viewModel: MarketListViewModel by viewModels {
-        MarketListViewModelFactory((requireContext().applicationContext as ListsApplication).repository)
-    }
+    private val viewModel: MarketListViewModel by sharedViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         adapter = MarketListsAdapter()
         binding = FragmentListsBinding.inflate(layoutInflater)
-
     }
 
     override fun onCreateView(

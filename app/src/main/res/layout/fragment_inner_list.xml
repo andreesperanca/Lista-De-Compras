@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -85,37 +84,41 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent">
 
-    <LinearLayout
-        android:id="@+id/dll_innerList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <TextView
-            android:id="@+id/txt_cartPrice"
+        <LinearLayout
+            android:id="@+id/dll_innerList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/cartprice"
-            android:textAlignment="center"
-            android:textSize="20sp" />
+            android:background="@drawable/top_line"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-        <TextView
-            android:id="@+id/cartPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="0"
-            android:textSize="50sp" />
+            <TextView
+                android:id="@+id/txt_cartPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cartprice"
+                android:textAlignment="center"
+                android:textSize="20sp" />
 
-        <Button
-            android:id="@+id/btn_add_item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/add_item" />
-
-    </LinearLayout>
+            <TextView
+                android:id="@+id/cartPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="0"
+                android:textSize="50sp" />
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_add_item"
+        style="@style/Theme.FloatingBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:contentDescription="null"
+        android:src="@drawable/ic_baseline_add_24"
+        app:layout_constraintBottom_toTopOf="@id/cardViewLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="@null" />
 </androidx.constraintlayout.widget.ConstraintLayout>

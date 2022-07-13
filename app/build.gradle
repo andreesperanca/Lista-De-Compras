@@ -77,4 +77,7 @@ dependencies {
     def lottieVersion = "3.4.0"
     implementation "com.airbnb.android:lottie:$lottieVersion"
 
+    //KOIN
+    implementation "io.insert-koin:koin-android:3.2.0"
+
 }

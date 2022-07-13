@@ -1,56 +1,73 @@
 package com.voltaire.listadecompras.ui.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.voltaire.listadecompras.R
 import com.voltaire.listadecompras.application.ListsApplication
 import com.voltaire.listadecompras.database.models.Item
 import com.voltaire.listadecompras.database.models.MarketListWithItems
-import com.voltaire.listadecompras.databinding.ActivityInnerListBinding
 import com.voltaire.listadecompras.databinding.FragmentInnerListBinding
 import com.voltaire.listadecompras.ui.adapters.InnerListAdapter
 import com.voltaire.listadecompras.ui.viewmodels.MarketListViewModel
 import com.voltaire.listadecompras.ui.viewmodels.factory.MarketListViewModelFactory
 import com.voltaire.listadecompras.utils.Constants
+import com.voltaire.listadecompras.utils.SwipeHandler
 import com.voltaire.listadecompras.utils.dialog.CreateItemDialog
-import com.voltaire.listadecompras.utils.extension.inflate
 import com.voltaire.listadecompras.utils.functions.toastCreator
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class InnerListFragment : Fragment() {
 
     private lateinit var binding: FragmentInnerListBinding
     private lateinit var adapter: InnerListAdapter
     private lateinit var recyclerView: RecyclerView
-    private var priceTotal: Double = 0.0
+    private val viewModel: MarketListViewModel by sharedViewModel()
 
+    private var priceTotal: Double = 0.0
     private val args: InnerListFragmentArgs by navArgs()
 
-    private val viewModelInner: MarketListViewModel by viewModels {
-        MarketListViewModelFactory((requireContext().applicationContext as ListsApplication).repository)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        adapter = InnerListAdapter()
+        binding = FragmentInnerListBinding.inflate(layoutInflater)
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentInnerListBinding.inflate(inflater)
+    ): View? = binding.root
 
-        //GET PARCELABLE
-        val listMarketListWithItems = args.marketListWithItems
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        //OBSERVER
+        val index = args.index
+        viewModel.allListsWithItems.observe(viewLifecycleOwner, Observer { listWithItems ->
+            if (listWithItems != null)
+            {
+                val listAtt: List<Item> = listWithItems[index].itemsLists
+                adapter.updateItems(listAtt)
+                viewModel.calculatePriceCart(listAtt)
+                binding.cartPrice.text = viewModel.updatePriceCart().toString()
+            } else
+            {
+                toastCreator(requireContext(), Constants.ERROR_MESSAGE)
+            }
+        })
 
         // TOOLBAR CONFIG
         binding.toolbar.title = args.marketListWithItems.marketList.name
@@ -59,22 +76,12 @@ class InnerListFragment : Fragment() {
             findNavController().navigate(R.id.action_innerListFragment_to_listsFragment)
         }
 
+        //GET PARCELABLE
+        val listMarketListWithItems = args.marketListWithItems
+
         //SWIPE HANDLER
-        val swipeHandler = object : ItemTouchHelper.SimpleCallback(0,
-            ItemTouchHelper.START or ItemTouchHelper.END) {
-            override fun onMove(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
-            ): Boolean {
-                return false
-            }
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                adapter.removeAt(viewHolder.adapterPosition)
-            }
-        }
-        val itemTouchHelper = ItemTouchHelper(swipeHandler)
-        itemTouchHelper.attachToRecyclerView(binding.rvInnerList)
+        SwipeHandler(actionAfterSwipe = { adapter.removeAt(position = it) })
+            .builder(binding.rvInnerList)
 
         //ADD ITEM BTN
         binding.btnAddItem.setOnClickListener {
@@ -82,42 +89,12 @@ class InnerListFragment : Fragment() {
                 requireContext(),
                 idList = listMarketListWithItems?.marketList?.idList ?: 0,
                 createItem = { item ->
-                    viewModelInner.insertItem(item)
+                    viewModel.insertItem(item)
                 }).show()
         }
 
-
         //CONFIG RECYCLERVIEW
         configureRecyclerView()
-
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        //OBSERVER
-        val index = args.index
-        viewModelInner.allListsWithItems.observe(this, Observer { it: List<MarketListWithItems>? ->
-            var listAtt: List<Item> = emptyList<Item>()
-            if (it != null) {
-                listAtt = it[index].itemsLists
-                adapter.setItems(listAtt)
-                priceTotal = 0.0
-                if (listAtt.isNotEmpty()) {
-                    for (element in listAtt) {
-                        priceTotal += element.priceTotalItem
-                    }
-                }
-            } else {
-                toastCreator(requireContext(), Constants.ERROR_MESSAGE)
-            }
-            binding.cartPrice.text = priceTotal.toString()
-        })
     }
 
     private fun configureRecyclerView() {
@@ -129,7 +106,7 @@ class InnerListFragment : Fragment() {
             recyclerView.addItemDecoration(divisor)
 
             adapter.excludeItem = { item ->
-                viewModelInner.deleteItem(item)
+                viewModel.deleteItem(item)
         }
     }
 }

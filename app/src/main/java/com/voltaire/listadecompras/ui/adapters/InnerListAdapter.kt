@@ -34,7 +34,7 @@ class InnerListAdapter(
         return itemsList.size
     }
 
-    fun setItems(itemLists: List<Item>) {
+    fun updateItems(itemLists: List<Item>) {
         itemsList = itemLists
         notifyItemChanged(itemsList.size)
     }
