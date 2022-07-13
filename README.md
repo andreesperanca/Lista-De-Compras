@@ -1,30 +1,34 @@
-<h1 align="center">Lista De Compras</h1>
-
+<h1 align="center">Calculadora de Compras</h1>
 
 <h1 align="center">
   <img style="border-radius: 50%;" src="./assets/listaListas.png" width="250px;" alt=""/>
   <img style="border-radius: 50%;" src="./assets/listaItems.png" width="250px;" alt=""/>
+  
   </h1>
   <h1 align="center">
   <img style="border-radius: 50%;" src="./assets/listaDeComprasGif.gif" width="250px;" alt=""/>
   </h1>
 
-
-### Sobre :book:
- Uma lista de compras simples, feita com o intuito de calcular o valor final da compra antes de passar no caixa. 
+ ### Sobre :book:
+ Um controlador de compras que calcula o valor final da compra antes de passar no caixa.
  
- ### Tecnologias :rocket:
+ ### Arquitetura do projeto 
+  - `MVVM`
  
- - MVVM
- - Kotlin 
- - Android Studio
- - Room DataBase
+ ### Tecnologias e técnicas utilizadas :rocket:
+ 
+ - `Jetpack Room`: lib para persistência de dados em banco de dados interno com SQLite;
+ - `Koin`: para injeções de depedências do projeto;
+ - `Shared Preferences`: para guardar pequenos valores;
+ - `Jetpack Navigation`: para a navegação de telas e troca de informações entre elas com o safe args;
+ - `Lottie`: para a integração com animações dentro do aplicativo;
  
  ### Funcionalidades 🛠
  
-- [x] Valor do carrinho.
-- [x] Criar listas e itens.
-- [ ] Editar itens
+- [x] Criar listas e produtos;
+- [x] Cálculo da lista em tempo real;
+- [x] Onboarding;
+- [x] Arrastar para deletar;
 
 ### Autor
 
